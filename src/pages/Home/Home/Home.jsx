@@ -1,4 +1,5 @@
 import {  Helmet } from 'react-helmet-async';
+import FeaturedTest from '../FeaturedTest/FeaturedTest';
 
 const Home = () => {
     return (
@@ -6,8 +7,10 @@ const Home = () => {
             <Helmet>
 
                  <title>ClarityHealth | Home</title>
+                 
 
             </Helmet>
+            <FeaturedTest></FeaturedTest>
             
             
         </div>

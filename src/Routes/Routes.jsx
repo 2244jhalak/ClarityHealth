@@ -5,9 +5,12 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Home/Login/Login";
 import Signup from "../pages/Home/Signup/Signup";
+import TestDetails from "../pages/Home/TestDetails/TestDetails";
+
 
 
 export const router = createBrowserRouter([
+  
     {
       path: "/",
       element: <Main></Main>,
@@ -24,6 +27,11 @@ export const router = createBrowserRouter([
         {
           path:"/signup",
           element:<Signup></Signup>
+        },
+        {
+          path:"/test/:id",
+          element:<TestDetails></TestDetails>,
+          loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
         }
         
       ]
