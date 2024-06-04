@@ -13,7 +13,7 @@ const TestDetails = () => {
     const tests = useLoaderData();
     
    
-    const {testName,imageUrl,details,price,date,slots,_id} = tests;
+    const {testName,imageUrl,details,price,date,slots} = tests;
    
     
     const {user} = useContext(AuthContext);
@@ -22,12 +22,13 @@ const TestDetails = () => {
     const axiosSecure=useAxiosSecure();
     
     const [,refetch] = useReservation();
-    const handleAddToReservation=id=>{
-        
+    const handleAddToReservation=tests=>{
+        console.log(tests.slots);
     
         if(user && user.email){
             
-            if(slots.length<0){
+            if(tests.slots > 0){
+                console.log(slots);
                 const reservation={
                     testName,
                     image:imageUrl,
@@ -43,23 +44,25 @@ const TestDetails = () => {
                   axiosSecure.post('/reservation',reservation)
                   .then(res=>{
                     console.log(res.data);
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${testName} is successfully added to reservation list`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     
                     refetch();
                   })
                   // patch
-              axiosSecure.patch(`/test/${id}`)
+              axiosSecure.patch(`/test/${tests._id}`)
               .then(res=>{
-                  console.log(res.data);
+                  
                   
                   if(res.data.modifiedCount > 0){
+                    window.location.reload();
                       
-                      Swal.fire({
-                          position: "top-end",
-                          icon: "success",
-                          title: `${testName} slot number is decreased!`,
-                          showConfirmButton: false,
-                          timer: 1500
-                      });
+                    console.log(res.data);
                       
                   }
               })
@@ -107,7 +110,7 @@ const TestDetails = () => {
       <p>Price: ${price}</p>
       <p>Date: {date}</p>
       <p className="flex justify-between">Slots: {slots}</p>
-      <button onClick={()=>handleAddToReservation(_id)} className="btn btn-primary text-white font-bold">Book Now</button>
+      <button onClick={()=>handleAddToReservation(tests)} className="btn btn-primary text-white font-bold">Book Now</button>
       </div>
     </div>
   </div>

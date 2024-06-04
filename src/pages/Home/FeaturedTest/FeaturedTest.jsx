@@ -4,7 +4,7 @@ import useTest from "../../../hooks/useTest";
 
 const FeaturedTest = () => {
     const [test,]=useTest();
-    console.log(test);
+    
     return (
         <div className="">
             <h3 className="text-3xl text-center font-semibold">Our Featured Test</h3>

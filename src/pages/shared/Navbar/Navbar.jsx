@@ -11,7 +11,7 @@ import useReservation from "../../../hooks/useReservation";
 const Navbar = () => {
 //   const [isAdmin] = useAdmin();
     const [reservation] = useReservation();
-    console.log(reservation);
+    
     const {user,logOut} = useContext(AuthContext);
     const logOutUser=()=>{
       logOut();
