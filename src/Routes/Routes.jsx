@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Home/Login/Login";
 import Signup from "../pages/Home/Signup/Signup";
 import TestDetails from "../pages/Home/TestDetails/TestDetails";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
         },
         {
           path:"/test/:id",
-          element:<TestDetails></TestDetails>,
+          element:<PrivateRoute><TestDetails></TestDetails></PrivateRoute>,
           loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
         }
         

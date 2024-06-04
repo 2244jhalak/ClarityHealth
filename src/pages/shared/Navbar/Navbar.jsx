@@ -3,18 +3,36 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 
+import { RiReservedFill } from "react-icons/ri";
+import useReservation from "../../../hooks/useReservation";
+
 
 
 const Navbar = () => {
 //   const [isAdmin] = useAdmin();
-//   const [cart]=useCart();
+    const [reservation] = useReservation();
+    console.log(reservation);
     const {user,logOut} = useContext(AuthContext);
     const logOutUser=()=>{
       logOut();
       
     }
-    const navOptions=<>
+    const navOptions=<div className="flex items-center">
     <li><Link to='/'>Home</Link></li>
+    <li>
+      <Link to="/dashboard/cart">
+      <button className="btn">
+        <RiReservedFill></RiReservedFill>
+  
+        <div className="badge badge-secondary">
+          +{reservation.length}
+        </div>
+      </button>
+
+      </Link>
+      
+
+    </li>
     {/* <li><Link to='/menu'>Our Menu</Link></li>
     <li><Link to='/order/Salads'>Order</Link></li>
     {user && isAdmin && <li><Link to="/dashboard/adminHome">Dashboard</Link></li>}
@@ -49,7 +67,7 @@ const Navbar = () => {
     
 
     
-    </>
+    </div>
     
     return (
         <div className="">
