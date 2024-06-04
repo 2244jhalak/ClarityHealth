@@ -1,19 +1,21 @@
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaUpload, FaUser, FaUsers, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
-import useCart from "../hooks/useCart";
-import useAdmin from "../hooks/useAdmin";
+
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import useReservation from "../hooks/useReservation";
+
 
 
 
 
 
 const Dashboard = () => {
-    const {user} =useContext(AuthContext)
-    const [cart] = useCart();
-    const [isAdmin]=useAdmin();
+    const {user} =useContext(AuthContext);
+    const [reservation]= useReservation();
+    // const [cart] = useCart();
+    // const [isAdmin]=useAdmin();
     
     
     
@@ -22,7 +24,7 @@ const Dashboard = () => {
             <div className="w-64 min-h-screen bg-orange-400">
                 <ul className="menu">
                     {
-                        user && isAdmin &&
+                        user &&
                         <>
                         <li>
                         <NavLink to="/dashboard/adminHome">
@@ -53,35 +55,25 @@ const Dashboard = () => {
                         </>
 
                     }
-                    {user && !isAdmin &&
+                    {user &&
                         <>
                         <li>
                         <NavLink to="/dashboard/userHome">
-                           <FaHome></FaHome>
-                            User Home</NavLink>
+                           <FaUser></FaUser>
+                            My Profile</NavLink>
                         </li>
                         <li>
                         <NavLink to="/dashboard/reservation">
                            <FaCalendar></FaCalendar>
-                            Reservation</NavLink>
+                            My Upcoming Appointments({reservation.length})</NavLink>
                         </li>
                         <li>
-                        <NavLink to="/dashboard/review">
-                           <FaAd></FaAd>
-                            Add a review</NavLink>
+                        <NavLink to="/dashboard/result">
+                           <FaUpload></FaUpload>
+                            Test results</NavLink>
                         </li>
-                       <li>
-                        <NavLink to="/dashboard/paymentHistory">
-                           <FaList></FaList>
-                            Payment History</NavLink>
-                       </li>
-                       <li>
-                        <NavLink to="/dashboard/cart">
-                            <FaShoppingCart></FaShoppingCart>
-                            My Cart({cart.length})</NavLink>
-                       </li>
-                        
-                        </>
+                       
+                    </>
                     }
                     
                     

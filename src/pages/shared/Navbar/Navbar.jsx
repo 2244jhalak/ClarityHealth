@@ -20,7 +20,7 @@ const Navbar = () => {
     const navOptions=<div className="flex items-center">
     <li><Link to='/'>Home</Link></li>
     <li>
-      <Link to="/dashboard/cart">
+      <Link to="/dashboard/reservation">
       <button className="btn">
         <RiReservedFill></RiReservedFill>
   
