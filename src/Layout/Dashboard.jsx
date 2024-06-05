@@ -21,7 +21,7 @@ const Dashboard = () => {
     
     return (
         <div className="flex">
-            <div className="w-64 min-h-screen bg-orange-400">
+            <div className="w-64 min-h-screen bg-[tomato]">
                 <ul className="menu">
                     {
                         user &&

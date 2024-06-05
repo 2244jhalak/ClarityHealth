@@ -9,6 +9,7 @@ import TestDetails from "../pages/Home/TestDetails/TestDetails";
 import Appointments from "../pages/Dashboard/Appointmets/Appointments"
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 
 
 
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
           path:"reservation",
           element:<Appointments></Appointments>
         },
+        {
+          path:"userHome",
+          element:<MyProfile></MyProfile>
+        }
       ]
     }
     
