@@ -1,21 +1,12 @@
 import { FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaSearch, FaUpload, FaUser, FaUsers, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-
-
-import { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider";
 import useReservation from "../hooks/useReservation";
-
-
-
-
-
-
+import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
-    const {user} =useContext(AuthContext);
+    
     const [reservation]= useReservation();
     // const [cart] = useCart();
-    // const [isAdmin]=useAdmin();
+    const [isAdmin]=useAdmin();
     
     
     
@@ -24,7 +15,7 @@ const Dashboard = () => {
             <div className="w-64 min-h-screen bg-[tomato]">
                 <ul className="menu">
                     {
-                        user &&
+                         isAdmin ?
                         <>
                         <li>
                         <NavLink to="/dashboard/adminHome">
@@ -54,8 +45,8 @@ const Dashboard = () => {
 
                         </>
 
-                    }
-                    {user &&
+                    
+                    :
                         <>
                         <li>
                         <NavLink to="/dashboard/userHome">

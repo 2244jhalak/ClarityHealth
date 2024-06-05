@@ -10,6 +10,8 @@ import Appointments from "../pages/Dashboard/Appointmets/Appointments"
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -56,7 +58,12 @@ export const router = createBrowserRouter([
         {
           path:"userHome",
           element:<MyProfile></MyProfile>
-        }
+        },
+        // admin route
+        {
+          path:"users",
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
       ]
     }
     
