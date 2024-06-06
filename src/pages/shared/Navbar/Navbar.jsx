@@ -3,15 +3,15 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 
-import { RiReservedFill } from "react-icons/ri";
-import useReservation from "../../../hooks/useReservation";
+
+
 import useAdmin from "../../../hooks/useAdmin";
 
 
 
 const Navbar = () => {
   const [isAdmin] = useAdmin();
-    const [reservation] = useReservation();
+    
     
     const {user,logOut} = useContext(AuthContext);
     const logOutUser=()=>{
@@ -22,24 +22,8 @@ const Navbar = () => {
     <li><Link to='/'>Home</Link></li>
     
     
-    {user && isAdmin && <li><Link to="/dashboard/users">Dashboard</Link></li>}
-    {user && !isAdmin && 
-      <li>
-      <Link to="/dashboard/reservation">
-      <button className="btn">
-        <RiReservedFill></RiReservedFill>
-  
-        <div className="badge badge-secondary">
-          +{reservation.length}
-        </div>
-      </button>
-
-      </Link>
-      
-
-    </li>
-    
-    }
+    {user && isAdmin && <li><Link to="/dashboard/users">Dashboard ({isAdmin && 'Admin'})</Link></li>}
+    {user && !isAdmin && <li><Link to="/dashboard/reservation">Dashboard ({user.displayName})</Link></li>}
     
     
     
