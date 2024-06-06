@@ -1,4 +1,4 @@
-import { FaBook, FaCalendar, FaEnvelope, FaHome, FaImage, FaList, FaSearch, FaUpload, FaUser, FaUsers } from "react-icons/fa";
+import { FaBook, FaCalendar, FaEnvelope, FaHome, FaImage, FaImages,  FaSearch, FaUpload, FaUser, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useReservation from "../hooks/useReservation";
 import useAdmin from "../hooks/useAdmin";
@@ -28,9 +28,9 @@ const Dashboard = () => {
                             Add Banner</NavLink>
                        </li>
                        <li>
-                        <NavLink to="/dashboard/manageItems">
-                           <FaList></FaList>
-                            Manage Items</NavLink>
+                        <NavLink to="/dashboard/allBanners">
+                           <FaImages></FaImages>
+                            All Banners</NavLink>
                        </li>
                        <li>
                         <NavLink to="/dashboard/bookings">

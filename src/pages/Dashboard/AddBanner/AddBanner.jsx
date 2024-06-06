@@ -33,7 +33,7 @@ const AddBanner = () => {
             rate:parseFloat(data.rate),
             
             image:res.data.data.display_url,
-            isActive:false
+            isActive:'false'
           }
           //
           const bannerRes = await axiosSecure.post('/banner',bannerItem);

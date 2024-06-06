@@ -13,6 +13,7 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddBanner from "../pages/Dashboard/AddBanner/AddBanner";
+import AllBanners from "../pages/Dashboard/AllBanners/AllBanners";
 
 
 
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
         {
           path:"addBanner",
           element:<AdminRoute><AddBanner></AddBanner></AdminRoute>
+        },
+        {
+          path:"allBanners",
+          element:<AdminRoute><AllBanners></AllBanners></AdminRoute>
         },
       ]
     }
