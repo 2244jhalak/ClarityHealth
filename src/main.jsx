@@ -18,6 +18,9 @@ const queryClient = new QueryClient()
 import {  HelmetProvider } from 'react-helmet-async';
 import AuthProvider from './provider/AuthProvider';
 
+  
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>

@@ -2,8 +2,10 @@ import { FaBook, FaCalendar, FaEnvelope, FaHome, FaImage, FaImages,  FaSearch, F
 import { NavLink, Outlet } from "react-router-dom";
 import useReservation from "../hooks/useReservation";
 import useAdmin from "../hooks/useAdmin";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 const Dashboard = () => {
-    
+    const {user}=useContext(AuthContext);
     const [reservation]= useReservation();
     // const [cart] = useCart();
     const [isAdmin]=useAdmin();
@@ -15,7 +17,7 @@ const Dashboard = () => {
             <div className="w-64 min-h-screen bg-[tomato]">
                 <ul className="menu">
                     {
-                         isAdmin ?
+                        user && isAdmin &&
                         <>
                         <li>
                         <NavLink to="/dashboard/adminHome">
@@ -44,9 +46,10 @@ const Dashboard = () => {
                        </li>
 
                         </>
-
+}
                     
-                    :
+                    {
+                        user && !isAdmin &&
                         <>
                         <li>
                         <NavLink to="/dashboard/userHome">

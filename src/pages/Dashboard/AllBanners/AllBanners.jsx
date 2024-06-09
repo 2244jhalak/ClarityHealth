@@ -23,7 +23,10 @@ const AllBanners = () => {
                 if (res.data.modifiedCount > 0) {
                     // Refetch to update the UI
                     refetch();
+                    
+                  
                 }
+                
             })
             .catch(error => {
                 console.error("Error updating banner status:", error);

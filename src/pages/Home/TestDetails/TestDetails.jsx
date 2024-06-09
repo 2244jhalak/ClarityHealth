@@ -1,123 +1,206 @@
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
-import useReservation from "../../../hooks/useReservation";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useContext } from "react";
-import { AuthContext } from "../../../provider/AuthProvider";
+
+
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import useBanners from "../../../hooks/useBanners";
+import { useEffect, useState, useRef, useContext } from 'react';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import Swal from "sweetalert2";
-
-
-
-
+import { AuthContext } from "../../../provider/AuthProvider";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useTest from "../../../hooks/useTest";
 
 const TestDetails = () => {
-    const tests = useLoaderData();
+  const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
+  const tests = useLoaderData();
+  const navigate=useNavigate();
+  const {user}=useContext(AuthContext);
+  const axiosSecure= useAxiosSecure();
+  const { testName, imageUrl, details, price, date, slots } = tests;
+
+  const [banners, refetch] = useBanners();
+  const [,refetchTest]=useTest();
+  const [discount, setDiscount] = useState(price);
+  const [hasExecuted, setHasExecuted] = useState(false);
+  const finalRef = useRef(null);
+  console.log(discount);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  useEffect(() => {
+    if (!hasExecuted) {
+      const banner = banners.find(banner => banner.isActive === 'true');
+      const rate = banner ? banner.rate : 0;
+      setDiscount(price - (price * rate) / 100);
+
+      console.log("Function executed on page reload.");
+      setHasExecuted(true);
+    }
+  }, [banners, price, hasExecuted]);
+
+  const handleBooked = () => {
+    const finalPrice = finalRef.current ? finalRef.current.innerText : price;
     
-   
-    const {testName,imageUrl,details,price,date,slots} = tests;
-   
     
-    const {user} = useContext(AuthContext);
-    const navigate=useNavigate();
-    const location=useLocation();
-    const axiosSecure=useAxiosSecure();
-    
-    const [,refetch] = useReservation();
-    const handleAddToReservation=tests=>{
-        console.log(tests.slots);
-    
-        if(user && user.email){
+    if(user && user.email){
             
-            if(tests.slots > 0){
-                console.log(slots);
-                const reservation={
-                    testName,
-                    image:imageUrl,
-                    email:user.email,
-                    details,
-                    price,
-                    date,
-                    slots,
-                    reportStatus: 'pending'
-                    
-        
-                  }
-                  axiosSecure.post('/reservation',reservation)
-                  .then(res=>{
-                    console.log(res.data);
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${testName} is successfully added to reservation list`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    
-                    refetch();
-                  })
-                  // patch
-              axiosSecure.patch(`/test/${tests._id}`)
-              .then(res=>{
-                  
-                  
-                  if(res.data.modifiedCount > 0){
-                    window.location.reload();
-                      
-                    console.log(res.data);
-                      
-                  }
-              })
+                  if(tests.slots > 0){
+                      console.log(slots);
+                      const reservation={
+                          testName,
+                          image:imageUrl,
+                          email:user.email,
+                          details,
+                          price,
+                          date,
+                          
+                          discountPrice: parseFloat(finalPrice),
+                          transactionId:'pending',
+                          reportStatus: 'pending'
+                          
               
-            }
-            else{
+                        }
+                        axiosSecure.post('/reservation',reservation)
+                        .then(res=>{
+                          console.log(res.data);
+                          Swal.fire({
+                              position: "top-end",
+                              icon: "success",
+                              title: `${testName} is successfully added to reservation list`,
+                              showConfirmButton: false,
+                              timer: 1500
+                          });
+                          
+                          refetch();
+                        })
+                        // patch
+                    axiosSecure.patch(`/test/${tests._id}`)
+                    .then(res=>{
+                        
+                        
+                        if(res.data.modifiedCount > 0){
+                          refetchTest();
+                          
+                            
+                          console.log(res.data);
+                            
+                        }
+                    })
+                    
+                  }
+                  else{
+                      Swal.fire({
+                          position: "top-end",
+                          icon: "success",
+                          title: `Sorry, ${testName} has no available slots`,
+                          showConfirmButton: false,
+                          timer: 1500
+                      });
+                    }
+                
+                    
+          
+                }
+              else{
                 Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `Sorry, ${testName} has no available slots`,
-                    showConfirmButton: false,
-                    timer: 1500
+                  title: "You are not logged in",
+                  text: "Please login to add to the cart?",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, login"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    navigate('/login',{state:{from:location}});
+                  }
                 });
               }
-          
-              
     
-          }
-        else{
-          Swal.fire({
-            title: "You are not logged in",
-            text: "Please login to add to the cart?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, login"
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate('/login',{state:{from:location}});
-            }
-          });
-        }
-        
-      }
-    return (
-        <div>
-            <div className="hero min-h-screen">
-  <div className="hero-content flex-col lg:flex-row">
-    <img src={imageUrl} className="w-1/2 h-[300px] rounded-lg shadow-2xl" />
+  };
+
+  const handlePromo = e => {
+    const banner = banners.find(banner => banner.isActive === 'true');
+    const code = banner ? banner.code : '';
+    const rate = banner ? banner.rate : 0;
+
+    let finalPrice;
+    if (e.target.value === code) {
+      finalPrice = price - (price * rate) / 100;
+    } else {
+      finalPrice = price;
+    }
+
+    if (finalRef.current) {
+      finalRef.current.innerText = finalPrice;
+    }
+  };
+
+  return (
     <div>
-      <h1 className="text-5xl font-bold">{testName}</h1>
-      <p className="py-6">{details}</p>
-      <div className="space-y-3">
-      <p>Price: ${price}</p>
-      <p>Date: {date}</p>
-      <p className="flex justify-between">Slots: {slots}</p>
-      <button onClick={()=>handleAddToReservation(tests)} className="btn btn-primary text-white font-bold">Book Now</button>
+      <div className="hero min-h-screen">
+        <div className="hero-content flex-col lg:flex-row">
+          <img src={imageUrl} className="w-1/2 h-[300px] rounded-lg shadow-2xl" />
+          <div>
+            <h1 className="text-5xl font-bold">{testName}</h1>
+            <p className="py-6">{details}</p>
+            <div className="space-y-3">
+              <p>Price: ${price}</p>
+              <p>Date: {date}</p>
+              <p className="flex justify-between">Slots: {slots}</p>
+
+              <button
+                className="btn btn-primary text-white font-bold"
+                onClick={() => document.getElementById('my_modal_1').showModal()}
+              >
+                Book Now
+              </button>
+              <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                  <h3 className="font-bold text-lg">{testName}</h3>
+                  <p className="py-4">Price: ${price}</p>
+                  <label className="form-control w-full">
+                    <div className="label">
+                      <span className="label-text">Use Promo?</span>
+                    </div>
+                    <input
+                      onKeyUp={handlePromo}
+                      id="promo"
+                      type="text"
+                      placeholder='Use valid promo code from banner'
+                      className="input input-bordered w-full"
+                    />
+                  </label>
+
+                  <p className="py-4">
+                    Final Price: $<span ref={finalRef}>{price}</span>
+                  </p>
+                  <div className="text-center">
+                    <Link to='/payment' onClick={handleBooked} className="btn btn-primary">
+                      Pay
+                    </Link>
+                  </div>
+                  <div>
+                  <Elements stripe={stripePromise}>
+                      
+                      
+                  </Elements>
+            </div>
+                  <div className="modal-action">
+                    <form method="dialog">
+                      <button className="btn">Close</button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-            
-        </div>
-    );
+  );
 };
 
 export default TestDetails;

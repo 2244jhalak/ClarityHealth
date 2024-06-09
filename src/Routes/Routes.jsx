@@ -15,6 +15,7 @@ import AdminRoute from "./AdminRoute";
 import AddBanner from "../pages/Dashboard/AddBanner/AddBanner";
 import AllBanners from "../pages/Dashboard/AllBanners/AllBanners";
 import AllTests from "../pages/Home/AllTests/AllTests";
+import Payment from "../pages/Home/Payment/Payment";
 
 
 
@@ -43,6 +44,11 @@ export const router = createBrowserRouter([
         {
           path:"/allTests",
           element:<AllTests></AllTests>
+        },
+        {
+          path:"/payment",
+          element:<Payment></Payment>,
+          
         },
         {
           path:"/test/:id",

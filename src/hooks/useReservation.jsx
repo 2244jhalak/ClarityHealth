@@ -9,7 +9,7 @@ const useReservation = () => {
     // tan stack query
     const axiosSecure = useAxiosSecure();
     const {user} =useContext(AuthContext);
-    const {refetch,data:reservation=[]}=useQuery({
+    const {data:reservation=[],refetch}=useQuery({
         queryKey:['reservation',user?.email],
         queryFn:async()=>{
             const res =await axiosSecure.get(`/reservation?email=${user?.email}`);

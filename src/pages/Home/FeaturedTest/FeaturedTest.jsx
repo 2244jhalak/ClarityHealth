@@ -8,7 +8,7 @@ const FeaturedTest = () => {
     
     return (
         <div className="">
-            <h3 className="text-3xl text-center font-semibold">Our Featured Test</h3>
+            <h3 className="text-3xl text-center font-semibold">My Featured Test</h3>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
                 {
                     reservation.map(testItem=>
@@ -22,7 +22,7 @@ const FeaturedTest = () => {
       <div className="space-y-2">
       <p>Price: ${testItem.price}</p>
       <p>Date: {testItem.date}</p>
-      <p className="flex justify-between">Slots: {testItem.slots}</p>
+      
       
       </div>
     
