@@ -1,6 +1,6 @@
 
 
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useBanners from "../../../hooks/useBanners";
 import { useEffect, useState, useRef, useContext } from 'react';
 import { loadStripe } from "@stripe/stripe-js";
@@ -13,7 +13,7 @@ import useTest from "../../../hooks/useTest";
 const TestDetails = () => {
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
   const tests = useLoaderData();
-  const navigate=useNavigate();
+  
   const {user}=useContext(AuthContext);
   const axiosSecure= useAxiosSecure();
   const { testName, imageUrl, details, price, date, slots } = tests;
@@ -23,7 +23,10 @@ const TestDetails = () => {
   const [discount, setDiscount] = useState(price);
   const [hasExecuted, setHasExecuted] = useState(false);
   const finalRef = useRef(null);
+  
+  
   console.log(discount);
+  
 
   useEffect(() => {
     refetch();
@@ -41,13 +44,13 @@ const TestDetails = () => {
   }, [banners, price, hasExecuted]);
 
   const handleBooked = () => {
+
     const finalPrice = finalRef.current ? finalRef.current.innerText : price;
     
     
     if(user && user.email){
             
-                  if(tests.slots > 0){
-                      console.log(slots);
+                  
                       const reservation={
                           testName,
                           image:imageUrl,
@@ -89,35 +92,13 @@ const TestDetails = () => {
                         }
                     })
                     
-                  }
-                  else{
-                      Swal.fire({
-                          position: "top-end",
-                          icon: "success",
-                          title: `Sorry, ${testName} has no available slots`,
-                          showConfirmButton: false,
-                          timer: 1500
-                      });
-                    }
+    }
+                 
                 
                     
           
-                }
-              else{
-                Swal.fire({
-                  title: "You are not logged in",
-                  text: "Please login to add to the cart?",
-                  icon: "warning",
-                  showCancelButton: true,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Yes, login"
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    navigate('/login',{state:{from:location}});
-                  }
-                });
-              }
+                
+              
     
   };
 
@@ -150,13 +131,30 @@ const TestDetails = () => {
               <p>Price: ${price}</p>
               <p>Date: {date}</p>
               <p className="flex justify-between">Slots: {slots}</p>
-
-              <button
+              {
+                slots<=0 ?
+                <button
+                
+                 className="btn btn-disabled text-white font-bold"
+                 
+                
+                 
+               >
+                 No available slot
+               </button>
+               :
+               <button
+               
                 className="btn btn-primary text-white font-bold"
+                
+               
                 onClick={() => document.getElementById('my_modal_1').showModal()}
               >
                 Book Now
               </button>
+
+              }
+             
               <dialog id="my_modal_1" className="modal">
                 <div className="modal-box">
                   <h3 className="font-bold text-lg">{testName}</h3>
@@ -178,6 +176,7 @@ const TestDetails = () => {
                     Final Price: $<span ref={finalRef}>{price}</span>
                   </p>
                   <div className="text-center">
+                    
                     <Link to='/payment' onClick={handleBooked} className="btn btn-primary">
                       Pay
                     </Link>

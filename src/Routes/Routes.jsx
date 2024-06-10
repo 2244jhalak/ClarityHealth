@@ -16,6 +16,7 @@ import AddBanner from "../pages/Dashboard/AddBanner/AddBanner";
 import AllBanners from "../pages/Dashboard/AllBanners/AllBanners";
 import AllTests from "../pages/Home/AllTests/AllTests";
 import Payment from "../pages/Home/Payment/Payment";
+import Reservation from "../pages/Dashboard/Reservation/Reservation";
 
 
 
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
         {
           path:"allBanners",
           element:<AdminRoute><AllBanners></AllBanners></AdminRoute>
+        },
+        {
+          path:"booked",
+          element:<AdminRoute><Reservation></Reservation></AdminRoute>
         },
       ]
     }

@@ -67,6 +67,7 @@ const AddBanner = () => {
   <input 
   type="text" 
   placeholder="Name" 
+  
   {...register("name",{required:true})}
   className="input input-bordered w-full" />
  

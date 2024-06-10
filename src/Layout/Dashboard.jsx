@@ -1,12 +1,13 @@
 import { FaBook, FaCalendar, FaEnvelope, FaHome, FaImage, FaImages,  FaSearch, FaUpload, FaUser, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import useReservation from "../hooks/useReservation";
+
 import useAdmin from "../hooks/useAdmin";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import useBookedPayment from "../hooks/useBookedPayment";
 const Dashboard = () => {
     const {user}=useContext(AuthContext);
-    const [reservation]= useReservation();
+    const [payments]= useBookedPayment();
     // const [cart] = useCart();
     const [isAdmin]=useAdmin();
     
@@ -35,9 +36,9 @@ const Dashboard = () => {
                             All Banners</NavLink>
                        </li>
                        <li>
-                        <NavLink to="/dashboard/bookings">
+                        <NavLink to="/dashboard/booked">
                            <FaBook></FaBook>
-                            Manage Bookings</NavLink>
+                            Reservation</NavLink>
                        </li>
                        <li>
                         <NavLink to="/dashboard/users">
@@ -59,7 +60,7 @@ const Dashboard = () => {
                         <li>
                         <NavLink to="/dashboard/reservation">
                            <FaCalendar></FaCalendar>
-                            My Upcoming Appointments({reservation.length})</NavLink>
+                            My Upcoming Appointments({payments.length})</NavLink>
                         </li>
                         <li>
                         <NavLink to="/dashboard/result">

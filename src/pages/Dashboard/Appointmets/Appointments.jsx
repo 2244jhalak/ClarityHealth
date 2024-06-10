@@ -2,13 +2,13 @@ import { FaTrashAlt } from "react-icons/fa";
 
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Link } from "react-router-dom";
-import useReservation from "../../../hooks/useReservation";
+
+import useBookedPayment from "../../../hooks/useBookedPayment";
 
 
 const Appointments = () => {
-    const [reservation,refetch]=useReservation();
-    const totalPrice=reservation.reduce((total,item)=>total+item.price,0);
+    const [payments,refetch]=useBookedPayment();
+    
     const axiosSecure = useAxiosSecure();
     const handleDelete=id=>{
         Swal.fire({
@@ -22,7 +22,7 @@ const Appointments = () => {
         }).then((result) => {
             if (result.isConfirmed) {
               
-               axiosSecure.delete(`/reservation/${id}`)
+               axiosSecure.delete(`/payments/${id}`)
                   .then(res=>{
                      if(res.data.deletedCount > 0){
                         refetch();
@@ -41,20 +41,7 @@ const Appointments = () => {
     }
     return (
        <div> 
-          <div className="flex justify-evenly mb-8">
-              <h2>Items: {reservation.length}</h2>
-              <h2>Total Price: {totalPrice}</h2>
-              {
-                reservation.length ?
-                <Link to='/dashboard/payment'>
-                  <button className="btn btn-primary">Pay</button>
-              </Link>
-              :
-              <button disabled className="btn btn-primary">Pay</button>
-              }
-              
-              
-          </div>
+          
           <div className="overflow-x-auto">
   <table className="table w-full">
     {/* head */}
@@ -66,12 +53,13 @@ const Appointments = () => {
         <th>Image</th>
         <th>Name</th>
         <th>Appointment Date</th>
+        <th>Report</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {
-        reservation.map((item,index)=>
+        payments.map((item,index)=>
             <tr key={item._id}>
         <th>
           {index+1}
@@ -80,16 +68,26 @@ const Appointments = () => {
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle w-12 h-12">
-                <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                <img src={item.image[0]} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             
           </div>
         </td>
         <td>
-          {item.testName}
+          {item.name[0]}
         </td>
         <td>{item.date}</td>
+        
+        <td>
+                    {
+                        item.status === 'pending'?
+                        <span className="text-red-600 cursor-pointer">{item.status}...</span>:
+                        <a className="text-green-600 cursor-pointer" href={item.status}>Result</a>
+                    }
+                    
+
+                  </td>
         <th>
           <button onClick={()=>handleDelete(item._id)} className="btn btn-ghost btn-xl text-red-600">
             <FaTrashAlt></FaTrashAlt>
