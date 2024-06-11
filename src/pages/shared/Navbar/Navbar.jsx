@@ -9,15 +9,22 @@ import useAdmin from "../../../hooks/useAdmin";
 
 
 
+
+
 const Navbar = () => {
-  const [isAdmin] = useAdmin();
-    
-    
-    const {user,logOut} = useContext(AuthContext);
+  const {user,logOut} = useContext(AuthContext);
     const logOutUser=()=>{
       logOut();
       
     }
+  const [isAdmin] = useAdmin();
+ 
+  
+
+ 
+    
+    
+    
     const navOptions=<div className="flex items-center">
     <li><Link to='/'>Home</Link></li>
     

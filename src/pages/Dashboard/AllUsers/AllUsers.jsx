@@ -1,21 +1,48 @@
-import { useQuery } from "@tanstack/react-query";
 
-import { FaTrashAlt,  FaUsers } from "react-icons/fa";
+
+import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
+import { useQuery } from "@tanstack/react-query";
 
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    
     const {data:users=[],refetch}=useQuery({
-        queryKey:['users'],
-        queryFn:async()=>{
-            const res =await axiosSecure.get('/users');
-            
-            return res.data;
-        }
-    })
+      queryKey:['users'],
+      queryFn:async()=>{
+          const res =await axiosSecure.get('/users');
+          
+          return res.data;
+      }
+  })
+    
+    
+    const handleActive=user=>{
+      
+      axiosSecure.patch(`users/blocked/${user._id}`)
+          .then(res => {
+              if (res.data.modifiedCount > 0) {
+                  // Refetch to update the UI
+                  refetch();
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${user.email} is Blocked By Admin!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  
+                
+              }
+              
+          })
+          .catch(error => {
+              console.error("Error updating banner status:", error);
+          });
+  }
+  
     const handleMakeAdmin=user=>{
         axiosSecure.patch(`/users/admin/${user._id}`)
         .then(res=>{
@@ -25,7 +52,7 @@ const AllUsers = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `${user.name} is an Admin Now!`,
+                    title: `${user.email} is an Admin Now!`,
                     showConfirmButton: false,
                     timer: 1500
                   });
@@ -33,34 +60,8 @@ const AllUsers = () => {
         })
 
     }
-    const handleDelete=user=>{
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-              
-               axiosSecure.delete(`/users/${user._id}`)
-                  .then(res=>{
-                     if(res.data.deletedCount > 0){
-                        refetch();
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-
-                }
-            })
-
-            }
-        });
-    }
+    
+    
     
     return (
         <div>
@@ -97,9 +98,13 @@ const AllUsers = () => {
 
             </td>
             <td>
-            <button onClick={()=>handleDelete(user)} className="btn btn-ghost btn-xl text-red-600">
-            <FaTrashAlt></FaTrashAlt>
+              
+            <button onClick={()=>handleActive(user)} className="btn btn-ghost btn-xl">
+               {
+                user.status==='active'?<span className="text-green-600">{user.status}</span>:<span className="text-red-600">{user.status}</span>
+               }
           </button>
+                  
             </td>
           </tr>)
       }

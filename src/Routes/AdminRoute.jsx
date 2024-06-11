@@ -5,12 +5,16 @@ import useAdmin from "../hooks/useAdmin";
 import { Navigate, useLocation } from "react-router-dom";
 
 
+
+
 const AdminRoute = ({children}) => {
+    
     const {user,loading}=useContext(AuthContext);
     const [isAdmin,isAdminLoading]=useAdmin();
+    
     const location=useLocation();
     console.log(location)
-    if(loading || isAdminLoading){
+    if(loading || isAdminLoading ){
          
           return <div className="text-center pt-20">
                <span className="loading loading-ball loading-lg"></span>

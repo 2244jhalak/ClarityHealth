@@ -5,11 +5,16 @@ import useAdmin from "../hooks/useAdmin";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useBookedPayment from "../hooks/useBookedPayment";
+import useActivity from "../hooks/useActivity";
+
+
 const Dashboard = () => {
     const {user}=useContext(AuthContext);
     const [payments]= useBookedPayment();
     // const [cart] = useCart();
     const [isAdmin]=useAdmin();
+    const [isBlocked] = useActivity();
+    console.log(isAdmin,isBlocked);
     
     
     
@@ -50,7 +55,7 @@ const Dashboard = () => {
 }
                     
                     {
-                        user && !isAdmin &&
+                       user && !isAdmin &&
                         <>
                         <li>
                         <NavLink to="/dashboard/userHome">

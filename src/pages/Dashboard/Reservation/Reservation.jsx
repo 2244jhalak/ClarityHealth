@@ -181,6 +181,38 @@ const Reservation = () => {
         console.error("Error updating report status:", error);
       });
   };
+  const handleDeleteItems = item =>{
+    console.log(item._id);
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            axiosSecure.delete(`/payment/${item._id}`)
+            .then(res=>{
+                if(res.data.deletedCount > 0){
+                    // refetch to update the ui
+                    
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: `${payment.name[0]} has been deleted.`,
+                        icon: "success"
+                      });
+
+                }
+
+            })
+            
+          
+        }
+      });
+}
 
   return (
     <div>
@@ -253,7 +285,7 @@ const Reservation = () => {
                     </button>
                   </td>
                   <th>
-                    <button className="btn btn-ghost btn-xl text-red-600">
+                    <button onClick={()=>handleDeleteItems(item)} className="btn btn-ghost btn-xl text-red-600">
                       <FaTrashAlt />
                     </button>
                   </th>
