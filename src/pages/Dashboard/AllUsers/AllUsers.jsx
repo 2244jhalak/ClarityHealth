@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+
 
 
 const AllUsers = () => {
@@ -78,6 +80,7 @@ const AllUsers = () => {
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Details</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -96,6 +99,9 @@ const AllUsers = () => {
               </button>
             }
 
+            </td>
+            <td>
+              <Link to={`/users/${user._id}`} className="btn btn-outline">See Info</Link>
             </td>
             <td>
               

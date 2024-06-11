@@ -17,6 +17,7 @@ import AllBanners from "../pages/Dashboard/AllBanners/AllBanners";
 import AllTests from "../pages/Home/AllTests/AllTests";
 import Payment from "../pages/Home/Payment/Payment";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
+import UserDetails from "../pages/Dashboard/UserDetails/UserDetails";
 
 
 
@@ -52,6 +53,11 @@ export const router = createBrowserRouter([
           
         },
         {
+          path:"/users/:id",
+          element:<UserDetails></UserDetails>,
+          loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`)
+        },
+        {
           path:"/test/:id",
           element:<PrivateRoute><TestDetails></TestDetails></PrivateRoute>,
           loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
@@ -78,6 +84,7 @@ export const router = createBrowserRouter([
           path:"users",
           element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
         },
+        
         {
           path:"addBanner",
           element:<AdminRoute><AddBanner></AddBanner></AdminRoute>
