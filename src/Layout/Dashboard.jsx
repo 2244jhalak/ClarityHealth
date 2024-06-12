@@ -7,6 +7,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import useBookedPayment from "../hooks/useBookedPayment";
 
 import { FaFile } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 
 const Dashboard = () => {
@@ -21,6 +22,10 @@ const Dashboard = () => {
     
     return (
         <div className="flex lg:flex-row md:flex-row flex-col">
+            <Helmet>
+        <title>ClarityHealth | Dashboard</title>
+        
+      </Helmet>
             <div className="lg:w-1/5 md:w-1/5 w-full py-5 my-5 bg-orange-300 text-black rounded-lg">
                 <ul className="menu">
                     {
