@@ -19,6 +19,7 @@ import Payment from "../pages/Home/Payment/Payment";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
 import UserDetails from "../pages/Dashboard/UserDetails/UserDetails";
 import AddTest from "../pages/Dashboard/AddTest/AddTest";
+import UpdateTest from "../pages/Dashboard/UpdateTest/UpdateTest"
 import AllDashTests from "../pages/Dashboard/AllDashTests/AllDashTests";
 
 
@@ -60,9 +61,9 @@ export const router = createBrowserRouter([
           loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`)
         },
         {
-          path:"/test/:id",
+          path:"/tests/:id",
           element:<PrivateRoute><TestDetails></TestDetails></PrivateRoute>,
-          loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
+          loader:({params})=>fetch(`http://localhost:5000/tests/${params.id}`)
         }
         
       ]
@@ -98,6 +99,12 @@ export const router = createBrowserRouter([
         {
           path:"addTest",
           element:<AdminRoute><AddTest></AddTest></AdminRoute>
+        },
+        {
+          path:"test/:id",
+          element:<AdminRoute><UpdateTest></UpdateTest></AdminRoute>,
+          loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
+
         },
         {
           path:"allTests",

@@ -79,7 +79,7 @@ const TestDetails = () => {
                           refetch();
                         })
                         // patch
-                    axiosSecure.patch(`/test/${tests._id}`)
+                    axiosSecure.patch(`/tests/${tests._id}`)
                     .then(res=>{
                         
                         

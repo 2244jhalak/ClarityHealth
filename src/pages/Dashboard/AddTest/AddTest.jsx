@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { FaImage } from "react-icons/fa";
 
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api=`https://api.imgbb.com/1/upload?key=${image_hosting_key}`
@@ -26,10 +27,10 @@ const AddTest = () => {
           const testItem={
             testName :data.testName,
             imageUrl:res.data.data.display_url,
-            details:data.description,
-            price:data.price,
+            details:data.details,
+            price:parseInt(data.price),
             date:data.date,
-            slots:data.slots,
+            slots:parseInt(data.slots),
           }
           //
           const testRes = await axiosSecure.post('/test',testItem);

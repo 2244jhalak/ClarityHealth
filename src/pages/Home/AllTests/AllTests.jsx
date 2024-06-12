@@ -53,7 +53,7 @@ const AllTests = () => {
                             <h2 className="card-title">{testItem.testName}</h2>
                             <p>Price: ${testItem.price}</p>
                             <div className="card-actions justify-end">
-                                <Link to={`/test/${testItem._id}`} className="btn btn-outline">View Details</Link>
+                                <Link to={`/tests/${testItem._id}`} className="btn btn-outline">View Details</Link>
                             </div>
                         </div>
                     </div>
