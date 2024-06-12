@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <div className=" bg-neutral text-neutral-content mt-5">
+       
+              <div className="bg-neutral text-neutral-content mt-5">
             <footer className="footer p-10 bg-neutral text-neutral-content">
   <aside>
     
     <h3 className="text-3xl font-semibold bg-neutral text-neutral-content">ClarityHealth</h3>
-    <p className="mb-3 text-white text-lg">Elevating healthcare through sustainable practices and timeless, elegant service.</p>
+    <p className="mb-3 text-white text-lg">Elevating healthcare through sustainable practices</p>
         <Link className='hover:text-orange-400' to="/">Home</Link>
         <Link className='hover:text-orange-400' to="/all">All Art & craft Items</Link>
         <Link className='hover:text-orange-400' to="/addCraft">Add Craft Item</Link>
@@ -33,10 +34,12 @@ const Footer = () => {
     </div>
   </nav>
 </footer>
-<p className="pl-10 text-sm">&copy; 2024 RusticRopeCrafts- All right reserved</p>
+<p className="pl-10 text-sm">&copy; 2024 ClarityHealth- All right reserved</p>
 
             
         </div>
+
+        
     );
 };
 

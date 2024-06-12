@@ -74,7 +74,7 @@ const AddBanner = () => {
   className="input input-bordered w-full" />
  
 </label>
-<div className="flex gap-6">
+<div className="flex lg:flex-row flex-col md:flex-col gap-6">
     
     {/* title */}
     <label className="form-control w-full my-6">

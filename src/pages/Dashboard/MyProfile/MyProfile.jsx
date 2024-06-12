@@ -1,13 +1,15 @@
-import useReservation from "../../../hooks/useReservation";
+
 import { updateProfile } from "firebase/auth";
 import { useContext, useState, useEffect } from "react";
 
 import { getAuth } from "firebase/auth";
 import { AuthContext } from "../../../provider/AuthProvider";
+import useBookedPayment from "../../../hooks/useBookedPayment";
 
 
 const UpdateProfile = () => {
-    const [reservation]= useReservation()
+   
+    const [payments]= useBookedPayment();
     const { user, setUser } = useContext(AuthContext);
     const auth = getAuth();
     const [displayName, setDisplayName] = useState("");
@@ -61,31 +63,26 @@ const UpdateProfile = () => {
 
 
     return (
-        <div className="text-center my-10">
+        <div className="my-10">
             <h2 className="text-3xl font-bold mb-5">My Profile</h2>
-            
-            {/*  */}
-            <div className="stats shadow mb-5">
+            <div className="stats shadow">
   
-  
-  
-              <div className="stat">
-                <div className="stat-figure text-secondary">
-                  <div className="avatar online">
+  <div className="stat">
+  <div className="avatar online">
                     <div className="w-36 rounded-full">
                       <img src={photoURL}/>
                     </div>
                   </div>
-                </div>
-                <div className="stat-value">{displayName}</div>
+  <div className="text-xl">{displayName}</div>
                 <div className="stat-title">{email}</div>
-                <div className="stat-desc text-secondary">{reservation.length} Upcoming Appointments</div>
-              </div>
-              
-            </div>
-            {/*  */}
+                <div className="stat-desc text-secondary">{payments.length} Upcoming Appointments</div>
+  </div>
+  
+</div>
             
-            {/*  */}
+            
+            
+           
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             
             <div>
@@ -111,9 +108,10 @@ const UpdateProfile = () => {
                             <input
                                 className="mb-3 font-semibold"
                                 type="email"
+                                
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                disabled={!isEditing}
+                                disabled
                             />
                         </label>
                         <br />

@@ -11,11 +11,11 @@ const FeaturedTest = () => {
     return (
         <div className="">
             <h3 className="text-3xl text-center font-semibold">My Featured Test</h3>
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
                 {
                     payments.map(testItem=>
-                        <div key={testItem._id} className="card w-full bg-base-100 shadow-xl">
-  <figure className="px-10 pt-10">
+                        <div key={testItem._id} className="card bg-base-100 shadow-xl">
+  <figure className="pt-10 px-10">
     <img src={testItem.image[0]} alt="Test_Image" className="rounded-xl h-[180px] w-full" />
   </figure>
   <div className="card-body">

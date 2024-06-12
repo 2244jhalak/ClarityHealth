@@ -1,11 +1,11 @@
-import { FaBook, FaCalendar, FaEnvelope, FaFileAlt, FaHome, FaImage, FaImages,  FaSearch, FaUpload, FaUser, FaUsers } from "react-icons/fa";
+import { FaBook, FaCalendar, FaFileAlt, FaHome, FaImage, FaImages, FaUpload, FaUser, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 import useAdmin from "../hooks/useAdmin";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useBookedPayment from "../hooks/useBookedPayment";
-import useActivity from "../hooks/useActivity";
+
 import { FaFile } from "react-icons/fa6";
 
 
@@ -15,23 +15,19 @@ const Dashboard = () => {
     const [payments]= useBookedPayment();
     // const [cart] = useCart();
     const [isAdmin]=useAdmin();
-    const [isBlocked] = useActivity();
-    console.log(isAdmin,isBlocked);
+    
     
     
     
     return (
-        <div className="flex">
-            <div className="w-64 min-h-screen bg-[tomato]">
+        <div className="flex lg:flex-row md:flex-row flex-col">
+            <div className="lg:w-1/5 md:w-1/5 w-full py-5 my-5 bg-orange-300 text-black rounded-lg">
                 <ul className="menu">
                     {
                         user && isAdmin &&
-                        <>
-                        <li>
-                        <NavLink to="/dashboard/adminHome">
-                           <FaHome></FaHome>
-                            Admin Home</NavLink>
-                        </li>
+                        <div className="flex lg:flex-col flex-col md:flex-col">
+                        
+                        
                         <li>
                         <NavLink to="/dashboard/addTest">
                            <FaFile></FaFile>
@@ -62,8 +58,9 @@ const Dashboard = () => {
                             <FaUsers></FaUsers>
                             All Users</NavLink>
                        </li>
+                       
 
-                        </>
+                        </div>
 }
                     
                     {
@@ -89,26 +86,17 @@ const Dashboard = () => {
                     }
                     
                     
-                    <div className="divider"></div>
+                    <div className="divider bg-white h-1"></div>
                     {/* shared nav links */}
                     <li>
                         <NavLink to="/">
                            <FaHome></FaHome>
                             Home</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/order/Salads">
-                           <FaSearch></FaSearch>
-                            Our Order</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contact">
-                           <FaEnvelope></FaEnvelope>
-                            Contact</NavLink>
-                    </li>
+                    
                 </ul>
             </div>
-            <div className="flex-1 p-8">
+            <div className="p-8">
                 <Outlet></Outlet>
             </div>
         </div>

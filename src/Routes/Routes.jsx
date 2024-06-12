@@ -17,10 +17,13 @@ import AllBanners from "../pages/Dashboard/AllBanners/AllBanners";
 import AllTests from "../pages/Home/AllTests/AllTests";
 import Payment from "../pages/Home/Payment/Payment";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
+
 import UserDetails from "../pages/Dashboard/UserDetails/UserDetails";
 import AddTest from "../pages/Dashboard/AddTest/AddTest";
 import UpdateTest from "../pages/Dashboard/UpdateTest/UpdateTest"
 import AllDashTests from "../pages/Dashboard/AllDashTests/AllDashTests";
+import Result from "../pages/Dashboard/Result/Result";
+import FAQ from "../pages/Home/FAQ/FAQ";
 
 
 
@@ -36,6 +39,10 @@ export const router = createBrowserRouter([
         {
             path:"/",
             element:<Home></Home>
+        },
+        {
+            path:"/faq",
+            element:<FAQ></FAQ>
         },
         
         {
@@ -82,6 +89,10 @@ export const router = createBrowserRouter([
           path:"userHome",
           element:<MyProfile></MyProfile>
         },
+        {
+          path:"result",
+          element:<Result></Result>
+        },
         // admin route
         {
           path:"users",
@@ -113,7 +124,7 @@ export const router = createBrowserRouter([
         {
           path:"booked",
           element:<AdminRoute><Reservation></Reservation></AdminRoute>
-        },
+        }
       ]
     }
     

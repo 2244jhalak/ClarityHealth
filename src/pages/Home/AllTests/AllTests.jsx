@@ -35,7 +35,7 @@ const AllTests = () => {
 
     return (
         <div>
-            <h2 className="text-center font-semibold text-3xl mb-5">All Available Tests (starting from date of today)</h2>
+            <h2 className="text-center font-semibold text-3xl mb-5">All Test</h2>
             <div className="flex justify-center mb-5">
                 <input
                     type="date"
@@ -45,9 +45,9 @@ const AllTests = () => {
                 />
             </div>
 
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
                 {currentPageData.map(testItem => (
-                    <div key={testItem._id} className="card w-96 bg-base-100 shadow-xl">
+                    <div key={testItem._id} className="card w-full bg-base-100 shadow-xl">
                         <figure><img className="w-full h-[250px]" src={testItem.imageUrl} alt="Test_Item" /></figure>
                         <div className="card-body">
                             <h2 className="card-title">{testItem.testName}</h2>

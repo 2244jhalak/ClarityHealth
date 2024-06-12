@@ -26,9 +26,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
     <QueryClientProvider client={queryClient}>
     <HelmetProvider>
+    
     <div className='container mx-auto'>
     <RouterProvider router={router}></RouterProvider>
     </div>
+    
 
     </HelmetProvider>
       

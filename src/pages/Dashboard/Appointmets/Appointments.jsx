@@ -53,7 +53,7 @@ const Appointments = () => {
         <th>Image</th>
         <th>Name</th>
         <th>Appointment Date</th>
-        <th>Report</th>
+        
         <th>Action</th>
       </tr>
     </thead>
@@ -79,20 +79,12 @@ const Appointments = () => {
         </td>
         <td>{item.date}</td>
         
+        
         <td>
-                    {
-                        item.status === 'pending'?
-                        <span className="text-red-600 cursor-pointer">{item.status}...</span>:
-                        <a className="text-green-600 cursor-pointer" href={item.status}>Result</a>
-                    }
-                    
-
-                  </td>
-        <th>
           <button onClick={()=>handleDelete(item._id)} className="btn btn-ghost btn-xl text-red-600">
             <FaTrashAlt></FaTrashAlt>
           </button>
-        </th>
+        </td>
       </tr>
         )
       }

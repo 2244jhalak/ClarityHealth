@@ -9,7 +9,7 @@ const Recommendation = () => {
     const [recommendation] = useRecommendation();
 
     const CustomPrevArrow = (props) => {
-        const { className, style, onClick } = props;
+        const { className,style, onClick } = props;
         return (
             <div
                 className={`${className} absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-gray-800 text-white p-2 rounded-full cursor-pointer`}
@@ -76,7 +76,7 @@ const Recommendation = () => {
                         
                         
                         <img className='absolute' src={item.image} alt="" />
-                        <div className="relative z-10 text-center text-white top-[20%]">
+                        <div className="relative z-10 text-white top-[20%]">
                             <h1 className="text-2xl lg:text-4xl font-bold mb-2">{item.title}</h1>
                             <p className="mb-4">{item.description}</p>
                         </div>
