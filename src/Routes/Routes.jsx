@@ -24,6 +24,8 @@ import UpdateTest from "../pages/Dashboard/UpdateTest/UpdateTest"
 import AllDashTests from "../pages/Dashboard/AllDashTests/AllDashTests";
 import Result from "../pages/Dashboard/Result/Result";
 import FAQ from "../pages/Home/FAQ/FAQ";
+import Quotes from "../pages/Home/Quotes/Quotes";
+import Partner from "../pages/Home/Partner/Partner";
 
 
 
@@ -43,6 +45,14 @@ export const router = createBrowserRouter([
         {
             path:"/faq",
             element:<FAQ></FAQ>
+        },
+        {
+            path:"/quotes",
+            element:<Quotes></Quotes>
+        },
+        {
+            path:"/partner",
+            element:<Partner></Partner>
         },
         
         {
@@ -65,12 +75,12 @@ export const router = createBrowserRouter([
         {
           path:"/users/:id",
           element:<UserDetails></UserDetails>,
-          loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`)
+          loader:({params})=>fetch(`https://b9a12-server-side-2244jhalak.vercel.app/users/${params.id}`)
         },
         {
           path:"/tests/:id",
           element:<PrivateRoute><TestDetails></TestDetails></PrivateRoute>,
-          loader:({params})=>fetch(`http://localhost:5000/tests/${params.id}`)
+          loader:({params})=>fetch(`https://b9a12-server-side-2244jhalak.vercel.app/tests/${params.id}`)
         }
         
       ]
@@ -114,7 +124,7 @@ export const router = createBrowserRouter([
         {
           path:"test/:id",
           element:<AdminRoute><UpdateTest></UpdateTest></AdminRoute>,
-          loader:({params})=>fetch(`http://localhost:5000/test/${params.id}`)
+          loader:({params})=>fetch(`https://b9a12-server-side-2244jhalak.vercel.app/test/${params.id}`)
 
         },
         {

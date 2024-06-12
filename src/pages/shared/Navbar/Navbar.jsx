@@ -33,8 +33,8 @@ const Navbar = () => {
     {user && !isAdmin && <li><Link to="/dashboard/reservation">Dashboard ({user.displayName})</Link></li>}
 
     <li><Link to='/faq'>FAQ</Link></li>
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/'>Home</Link></li>
+    <li><Link to='/quotes'>Quotes</Link></li>
+    <li><Link to='/partner'>Our Partner</Link></li>
     
     
     

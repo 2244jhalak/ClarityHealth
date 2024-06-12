@@ -1,9 +1,9 @@
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 
 import Swal from "sweetalert2";
 
 
-import { Link } from "react-router-dom";
+
 import useBanners from "../../../hooks/useBanners";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
@@ -80,7 +80,7 @@ const AllBanners = () => {
         <th>ITEM NAME</th>
         <th>PRICE</th>
         <th>Banner Status</th>
-        <th>ACTION</th>
+        
         <th>ACTION</th>
       </tr>
     </thead>
@@ -106,18 +106,12 @@ const AllBanners = () => {
         </td>
         <td>{banner.title}</td>
         <td><button onClick={()=>handleActive(banner)} className="px-2 py-1 text-red-400 text-cenetr">{banner.isActive}</button></td>
-        <th>
-          <Link to={`/dashboard/updateItem/${banner._id}`}>
-              <button className="btn btn-ghost btn-xl text-red-600">
-                <FaEdit></FaEdit>
-              </button>
-          </Link>
-        </th>
-        <th>
+        
+        <td>
           <button onClick={()=>handleDeleteItems(banner)} className="btn btn-ghost btn-xl text-red-600">
             <FaTrashAlt></FaTrashAlt>
           </button>
-        </th>
+        </td>
       </tr>
         )
       }

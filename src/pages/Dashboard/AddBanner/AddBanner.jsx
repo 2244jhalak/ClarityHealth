@@ -132,7 +132,7 @@ const AddBanner = () => {
 </label>
 
 <button className="btn">
-    Add Image <FaImage className="ml-4"></FaImage>
+    Add Banner<FaImage className="ml-4"></FaImage>
 </button>
       
       

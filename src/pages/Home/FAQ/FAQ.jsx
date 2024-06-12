@@ -1,9 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
 
+import { Helmet } from "react-helmet-async";
+
 
 const FAQ = () => {
     return (
         <div className="my-10 px-10">
+            <Helmet>
+        <title>ClarityHealth | FAQ</title>
+        
+      </Helmet>
             <h2 className="my-5 text-3xl font-semibold text-center">Frequently Asked Questions</h2>
             <div className="collapse collapse-arrow bg-base-200">
   <input type="radio" name="my-accordion-2" defaultChecked /> 

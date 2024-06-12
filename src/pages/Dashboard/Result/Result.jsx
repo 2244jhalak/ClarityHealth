@@ -10,7 +10,7 @@ const Result = () => {
         doc.text("User Details", 10, 10);
         doc.text(`Test Name: ${data.name}`, 10, 20);
         doc.text(`Email: ${data.email}`, 10, 30);
-        doc.text(`Appointments Date: ${data.status}`, 10, 40);
+        doc.text(`Result: ${data.status}`, 10, 40);
         doc.save("user-details.pdf");
     };
     
