@@ -1,4 +1,4 @@
-import { FaBook, FaCalendar, FaEnvelope, FaHome, FaImage, FaImages,  FaSearch, FaUpload, FaUser, FaUsers } from "react-icons/fa";
+import { FaBook, FaCalendar, FaEnvelope, FaFileAlt, FaHome, FaImage, FaImages,  FaSearch, FaUpload, FaUser, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 import useAdmin from "../hooks/useAdmin";
@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import useBookedPayment from "../hooks/useBookedPayment";
 import useActivity from "../hooks/useActivity";
+import { FaFile } from "react-icons/fa6";
 
 
 const Dashboard = () => {
@@ -30,6 +31,16 @@ const Dashboard = () => {
                            <FaHome></FaHome>
                             Admin Home</NavLink>
                         </li>
+                        <li>
+                        <NavLink to="/dashboard/addTest">
+                           <FaFile></FaFile>
+                            Add Test</NavLink>
+                       </li>
+                       <li>
+                        <NavLink to="/dashboard/allTests">
+                           <FaFileAlt></FaFileAlt>
+                            All Tests</NavLink>
+                       </li>
                         <li>
                         <NavLink to="/dashboard/addBanner">
                            <FaImage></FaImage>

@@ -5,14 +5,20 @@ import useTest from "../../../hooks/useTest";
 const AllTests = () => {
     const [test] = useTest();
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedDate, setSelectedDate] = useState("");
     const itemsPerPage = 6;
 
+    // Filter data based on selected date
+    const filteredData = test.filter(testItem => {
+        return !selectedDate || new Date(testItem.date) >= new Date(selectedDate);
+    });
+
     // Calculate total pages
-    const totalPages = Math.ceil(test.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
     // Get current page data
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentPageData = test.slice(startIndex, startIndex + itemsPerPage);
+    const currentPageData = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
     // Handle page change
     const handlePageChange = (page) => {
@@ -21,9 +27,24 @@ const AllTests = () => {
         }
     };
 
+    // Handle date change
+    const handleDateChange = (event) => {
+        setSelectedDate(event.target.value);
+        setCurrentPage(1); // Reset to first page when date changes
+    };
+
     return (
         <div>
-            <h2 className="text-center font-semibold text-3xl mb-5">All Tests</h2>
+            <h2 className="text-center font-semibold text-3xl mb-5">All Available Tests (starting from date of today)</h2>
+            <div className="flex justify-center mb-5">
+                <input
+                    type="date"
+                    className="input input-bordered"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                />
+            </div>
+
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
                 {currentPageData.map(testItem => (
                     <div key={testItem._id} className="card w-96 bg-base-100 shadow-xl">

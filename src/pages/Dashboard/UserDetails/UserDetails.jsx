@@ -37,8 +37,8 @@ const UserDetails = () => {
                             </div>
                         </div>
                         <div className="stat-value">{data.email}</div>
-                        <div className="stat-title">{data.displayName || 'Not Set'}</div>
-                        <div className="stat-desc text-secondary">{specificData.length} Upcoming Appointments</div>
+                        
+                        <div className="stat-desc text-secondary">{specificData.length} Appointments</div>
                     </div>
                 ))}
             </div>

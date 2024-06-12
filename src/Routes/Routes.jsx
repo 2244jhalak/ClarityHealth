@@ -18,6 +18,8 @@ import AllTests from "../pages/Home/AllTests/AllTests";
 import Payment from "../pages/Home/Payment/Payment";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
 import UserDetails from "../pages/Dashboard/UserDetails/UserDetails";
+import AddTest from "../pages/Dashboard/AddTest/AddTest";
+import AllDashTests from "../pages/Dashboard/AllDashTests/AllDashTests";
 
 
 
@@ -92,6 +94,14 @@ export const router = createBrowserRouter([
         {
           path:"allBanners",
           element:<AdminRoute><AllBanners></AllBanners></AdminRoute>
+        },
+        {
+          path:"addTest",
+          element:<AdminRoute><AddTest></AddTest></AdminRoute>
+        },
+        {
+          path:"allTests",
+          element:<AdminRoute><AllDashTests></AllDashTests></AdminRoute>
         },
         {
           path:"booked",
