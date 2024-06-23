@@ -11,9 +11,9 @@ const Footer = () => {
     <h3 className="text-3xl font-semibold bg-neutral text-neutral-content">ClarityHealth</h3>
     <p className="mb-3 text-white text-lg">Elevating healthcare through sustainable practices</p>
         <Link className='hover:text-orange-400' to="/">Home</Link>
-        <Link className='hover:text-orange-400' to="/all">All Art & craft Items</Link>
-        <Link className='hover:text-orange-400' to="/addCraft">Add Craft Item</Link>
-        <Link className='hover:text-orange-400' to="/myCraft">My Art&Craft List</Link>
+        <Link className='hover:text-orange-400' to="/faq">FAQ</Link>
+        <Link className='hover:text-orange-400' to="/quotes">Quotes</Link>
+        <Link className='hover:text-orange-400' to="/partner">Our Partner</Link>
       
   </aside> 
   <nav>

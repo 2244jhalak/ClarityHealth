@@ -2,8 +2,7 @@ import { FaBook, FaCalendar, FaFileAlt, FaHome, FaImage, FaImages, FaUpload, FaU
 import { NavLink, Outlet } from "react-router-dom";
 
 import useAdmin from "../hooks/useAdmin";
-import { useContext } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+
 import useBookedPayment from "../hooks/useBookedPayment";
 
 import { FaFile } from "react-icons/fa6";
@@ -12,7 +11,7 @@ import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
     
-    const {user}=useContext(AuthContext);
+    
     const [payments]= useBookedPayment();
     // const [cart] = useCart();
     const [isAdmin]=useAdmin();
@@ -29,7 +28,7 @@ const Dashboard = () => {
             <div className="lg:w-1/5 md:w-1/5 w-full py-5 my-5 bg-orange-300 text-black rounded-lg">
                 <ul className="menu">
                     {
-                        user && isAdmin &&
+                        isAdmin?
                         <div className="flex lg:flex-col flex-col md:flex-col">
                         
                         
@@ -66,11 +65,11 @@ const Dashboard = () => {
                        
 
                         </div>
-}
-                    
-                    {
-                       user && !isAdmin &&
-                        <>
+
+                    :
+                   
+                       
+                        <div className="flex lg:flex-col flex-col md:flex-col">
                         <li>
                         <NavLink to="/dashboard/userHome">
                            <FaUser></FaUser>
@@ -87,7 +86,7 @@ const Dashboard = () => {
                             Test results</NavLink>
                         </li>
                        
-                    </>
+                    </div>
                     }
                     
                     
