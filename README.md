@@ -24,6 +24,6 @@ This is a web application for a diagnostic center where patients can book availa
 
 
 ## How to Run Locally
-- Clone the repository: `https://github.com/2244jhalak/Art-Craft-Store.git`
+- Clone the repository: `https://github.com/2244jhalak/Diagnostic-center.git`
 - Install dependencies: `npm install`
 - Start the server: `npm start`
