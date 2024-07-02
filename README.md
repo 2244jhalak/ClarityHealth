@@ -27,3 +27,6 @@ This is a web application for a diagnostic center where patients can book availa
 - Clone the repository: `https://github.com/2244jhalak/Diagnostic-center.git`
 - Install dependencies: `npm install`
 - Start the server: `npm start`
+  
+## Live Link
+- [ClarityHealth](https://b9a12-client-side-2244jhalak.web.app/)
